@@ -100,6 +100,16 @@ class connect_class_dom extends connect_class {
 
         $domnodelist = $dom->getElementsByTagName('status');
 
+        if (!is_object($domnodelist->item(0))) {
+            if (is_siteadmin($USER->id)) {
+                notice(get_string('adminemptyxml', 'adobeconnect'),
+                       $CFG->wwwroot . '/admin/settings.php?section=modsettingadobeconnect');
+            } else {
+                notice(get_string('emptyxml', 'adobeconnect'),
+                       '', $COURSE);
+            }
+        }
+
         if ($domnodelist->item(0)->hasAttributes()) {
 
             $domnode = $domnodelist->item(0)->attributes->getNamedItem('code');
