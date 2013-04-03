@@ -9,4 +9,6 @@
 
 $module->version  = 2013022700;  // The current module version (Date: YYYYMMDDXX)
 $module->cron     = 0;           // Period for cron to check this module (secs)
+$module->component = 'mod_adobeconnect';
+$module->maturity  = MATURITY_STABLE;
 $module->release  = '2.4.0.0';
