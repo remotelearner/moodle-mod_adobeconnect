@@ -907,6 +907,10 @@ function aconnect_meeting_exists($aconnect, $meetfldscoid, $filter = array()) {
                             $value = (!is_null($meetingdetail->getElementsByTagName('name'))) ?
                                      $meetingdetail->getElementsByTagName('name')->item(0)->nodeValue : '';
 
+                            if (!isset($matches[$key])) {
+                                $matches[$key] = new stdClass();
+                            }
+
                             $matches[$key]->name = (string) $value;
 
                             $value = (!is_null($meetingdetail->getElementsByTagName('url-path'))) ?
