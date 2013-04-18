@@ -165,3 +165,4 @@ $string['longurl'] = 'That meeting URL is too long. Try shortening it';
 $string['errorrecording'] = 'Unable to find recording session';
 $string['meetinfo'] = 'More Meeting Detail';
 $string['meetinfotxt'] = 'See server meeting details';
+$string['missingexpectedgroups'] = 'There are no groups available.';

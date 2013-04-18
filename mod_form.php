@@ -117,7 +117,7 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
     }
 
     function validation($data, $files) {
-        global $CFG, $DB, $USER;
+        global $CFG, $DB, $USER, $COURSE;
 
         $errors = parent::validation($data, $files);
 
@@ -178,6 +178,14 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
             // Do nothing
         } elseif (!preg_match('/^[a-z][a-z\-]*/i', $data['meeturl'])) {
             $errors['meeturl'] = get_string('invalidurl', 'adobeconnect');
+        }
+
+        // Check for available groups if groupmode is selected
+        if ($data['groupmode'] > 0) {
+            $crsgroups = groups_get_all_groups($COURSE->id);
+            if (empty($crsgroups)) {
+                $errors['groupmode'] = get_string('missingexpectedgroups', 'adobeconnect');
+            }
         }
 
         // Adding activity
