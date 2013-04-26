@@ -7,8 +7,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$module->version  = 2012020200;  // The current module version (Date: YYYYMMDDXX)
+$module->version  = 2012020201;  // The current module version (Date: YYYYMMDDXX)
 $module->cron     = 0;           // Period for cron to check this module (secs)
 $module->component = 'mod_adobeconnect';
 $module->maturity  = MATURITY_STABLE;
-$module->release  = '2.2.1.0';
+$module->release  = '2.2.1.1';
