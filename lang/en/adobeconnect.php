@@ -30,8 +30,7 @@ $string['duplicatemeetingname'] = 'A duplicate meeting name was found on the ser
 $string['duplicateurl'] = 'A duplicate meeting URL was found on the server';
 $string['editingfor'] = 'Editing for: $a';
 $string['email_login'] = 'Email address login';
-$string['email_login_desc'] = 'Check this option only if your Connect Pro server login is set to use email address. Note that toggling '.
-                              'this option on/off during regular usage of this activity module can potentially create duplicaed users on the Connect Pro server';
+$string['email_login_desc'] = 'Check this option only if your Connect Pro server login is set to use email address. Note that toggling this option on/off during regular usage of this activity module can potentially create duplicaed users on the Connect Pro server';
 $string['endtime'] = 'End time';
 $string['existingusers'] = '$a existing users';
 $string['groupswitch'] = 'Filter by group';
@@ -72,10 +71,7 @@ $string['starttime'] = 'Start time';
 $string['usergrouprequired'] = 'This Meeting requires users to be in a group in order to join';
 $string['testconnection'] = 'Test Connection';
 $string['connectiontesttitle'] = 'Connection test window';
-$string['conntestintro'] = '<p>A series of tests have been run in order to determine whether the Adobe Connect Pro server has been properly setup for this integration to work'.
-' and to also determine whether the user credentials provided in the activity global settings has the correct permissions to perform the neccessary tasks required by the'.
-' activity module.  If any of the tests below have failed, this activity module will not function properly.</p><p> For further assistance and documentation in how to set up your'.
-' Adobe Connect Pro server please consult the MoodleDocs help page for this activity module <a href="{$a->url}">Help page</a></p>';
+$string['conntestintro'] = '<p>A series of tests have been run in order to determine whether the Adobe Connect Pro server has been properly setup for this integration to work and to also determine whether the user credentials provided in the activity global settings has the correct permissions to perform the neccessary tasks required by the activity module.  If any of the tests below have failed, this activity module will not function properly.</p><p> For further assistance and documentation in how to set up your Adobe Connect Pro server please consult the MoodleDocs help page for this activity module <a href="{$a->url}">Help page</a></p>';
 $string['greaterstarttime'] = 'The start time cannot be greater than the end time';
 $string['invalidadobemeeturl'] = 'Invalid entry for this field.  Click the help bubble for valid entries';
 
