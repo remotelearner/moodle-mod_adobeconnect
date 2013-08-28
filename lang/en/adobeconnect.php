@@ -108,7 +108,7 @@ $string['settingblurb'] = '<center><img src="{$a->image}" /></center><br />
     Alfresco partner. The company offers SaaS hosting services, IT support contracts, custom
     programming, workforce development training, instructional design and strategic consulting
     services for organizations planning online learning programs.</p><br />
-    <p>Visit {$a->url} for information on Enterprise support</p>';
+    <p>Visit the <a href="{$a->url}">Adobe Connect Moodle Plugins Directory</a> for information on Enterprise support.</p>';
 $string['meeturl_help'] = '<p>You can customize the URL that is used to connect to the Adobe connect meeting.  The Adobe Server domain will always remain the same.
   However the last part of the URL can be customized.
 </p>
