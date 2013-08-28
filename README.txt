@@ -16,7 +16,7 @@ Alfresco partner. The company offers SaaS hosting services, IT support contracts
 programming, workforce development training, instructional design and strategic consulting
 services for organizations planning online learning programs.
 
-Visit http://remote-learner.net/adobeconnectpro for information on Enterprise support.
+Visit https://moodle.org/plugins/view.php?plugin=mod_adobeconnect for information on Enterprise support.
 
 
 INSTALL INSTRUCTIONS
