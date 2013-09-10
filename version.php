@@ -5,9 +5,9 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$module->version   = 2013022703;
+$module->version   = 2013022704;
 $module->requires  = 2012120300;
 $module->cron      = 0;
 $module->component = 'mod_adobeconnect';
 $module->maturity  = MATURITY_STABLE;
-$module->release   = '2.4.1.2';
+$module->release   = '2.4.1.3';
