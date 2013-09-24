@@ -17,7 +17,7 @@ if ($ADMIN->fulltree) {
 //print_object($ADMIN);
 
     require_once($CFG->dirroot . '/mod/adobeconnect/locallib.php');
-$PAGE->requires->js_init_call('M.mod_adobeconnect.init');
+    $PAGE->requires->js_init_call('M.mod_adobeconnect.init');
 
 //$data = get_data();
 
@@ -49,7 +49,7 @@ $PAGE->requires->js_init_call('M.mod_adobeconnect.init');
 
 
     $url = $CFG->wwwroot . '/mod/adobeconnect/conntest.php';
-    $url = htmlentities($url);
+    $url = htmlentities($url, ENT_COMPAT | ENT_HTML401i, 'UTF-8');
     $options = 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=700,height=300';
     $str = '<center><input type="button" onclick="window.open(\''.$url.'\', \'\', \''.$options.'\');" value="'.
            get_string('testconnection', 'adobeconnect') . '" /></center>';

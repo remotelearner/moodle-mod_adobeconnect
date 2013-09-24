@@ -33,7 +33,7 @@ class connect_class_dom extends connect_class {
 
         foreach($params as $key => $data) {
 
-            $datahtmlent = htmlentities($data);
+            $datahtmlent = htmlentities($data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
             $child = $dom->createElement('param', $datahtmlent);
             $root->appendChild($child);
 
