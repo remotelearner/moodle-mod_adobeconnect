@@ -49,7 +49,7 @@ if ($ADMIN->fulltree) {
 
 
     $url = $CFG->wwwroot . '/mod/adobeconnect/conntest.php';
-    $url = htmlentities($url, ENT_COMPAT | ENT_HTML401i, 'UTF-8');
+    $url = htmlentities($url, ENT_COMPAT, 'UTF-8');
     $options = 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=700,height=300';
     $str = '<center><input type="button" onclick="window.open(\''.$url.'\', \'\', \''.$options.'\');" value="'.
            get_string('testconnection', 'adobeconnect') . '" /></center>';
