@@ -42,7 +42,7 @@ $usrobj->username = set_username($usrobj->username, $usrobj->email);
 
 $usrcanjoin = false;
 
-$context   = get_context_instance(CONTEXT_MODULE, $cm->id);
+$context = context_module::instance($cm->id);
 
 // If separate groups is enabled, check if the user is a part of the selected group
 if (NOGROUPS != $cm->groupmode) {

@@ -76,10 +76,10 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
 
 
         $mform->addElement('hidden', 'tempenable');
-        $mform->setType('type', PARAM_INT);
+        $mform->setType('tempenable', PARAM_INT);
 
         $mform->addElement('hidden', 'userid');
-        $mform->setType('type', PARAM_INT);
+        $mform->setType('userid', PARAM_INT);
 
         // Start and end date selectors
         $time       = time();
@@ -129,15 +129,15 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
         // meeting name (and error) when the user begins to add participants to the meeting
         $meetfldscoid = aconnect_get_folder($aconnect, 'meetings');
         $filter = array('filter-like-name' => $data['name']);
-        $namematches = aconnect_meeting_exists($aconnect, $meetfldscoid, $filter);        
-        
+        $namematches = aconnect_meeting_exists($aconnect, $meetfldscoid, $filter);
+
         /// Search the user's adobe connect folder
         $usrfldscoid = aconnect_get_user_folder_sco_id($aconnect, $username);
 
 	if (!empty($usrfldscoid)) {
         	$namematches = $namematches + aconnect_meeting_exists($aconnect, $usrfldscoid, $filter);
         }
-        
+
         if (empty($namematches)) {
             $namematches = array();
         }
@@ -154,7 +154,7 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
 
         $filter = array('filter-like-url-path' => $url);
         $urlmatches = aconnect_meeting_exists($aconnect, $meetfldscoid, $filter);
-        
+
         /// Search the user's adobe connect folder
         if (!empty($usrfldscoid)) {
             $urlmatches = $urlmatches + aconnect_meeting_exists($aconnect, $usrfldscoid, $filter);

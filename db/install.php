@@ -17,7 +17,7 @@ function xmldb_adobeconnect_install() {
     // The commented out code is waiting for a fix for MDL-25709
     $result = true;
     $timenow = time();
-    $sysctx  = get_context_instance(CONTEXT_SYSTEM);
+    $sysctx = context_system::instance();
     $mrole = new stdClass();
     $levels = array(CONTEXT_COURSECAT, CONTEXT_COURSE, CONTEXT_MODULE);
 

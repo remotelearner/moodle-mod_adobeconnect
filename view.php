@@ -57,7 +57,7 @@ if ($id) {
 
 require_login($course, true, $cm);
 
-$context = get_context_instance(CONTEXT_MODULE, $cm->id);
+$context = context_module::instance($cm->id);
 
 // Check for submitted data
 if (($formdata = data_submitted($CFG->wwwroot . '/mod/adobeconnect/view.php')) && confirm_sesskey()) {
@@ -98,7 +98,7 @@ $stradobeconnects = get_string('modulenameplural', 'adobeconnect');
 $stradobeconnect  = get_string('modulename', 'adobeconnect');
 
 $params = array('instanceid' => $cm->instance);
-$sql = "SELECT meetingscoid ". 
+$sql = "SELECT meetingscoid ".
        "FROM {adobeconnect_meeting_groups} amg ".
        "WHERE amg.instanceid = :instanceid ";
 
@@ -179,7 +179,7 @@ if (!empty($meetscoids)) {
             }
         }
     }
-    
+
     unset($names);
 
 
@@ -253,13 +253,13 @@ if ($cm->groupmode) {
         // Retrieve the currently active group for the user's session
         $groupid = groups_get_activity_group($cm);
 
-        /* Depending on the series of events groups_get_activity_group will 
+        /* Depending on the series of events groups_get_activity_group will
          * return a groupid value of  0 even if the user belongs to a group.
          * If the groupid is set to 0 then use the first group that the user
          * belongs to.
          */
         $aag = has_capability('moodle/site:accessallgroups', $context);
-        
+
         if (0 == $groupid) {
             $groups = groups_get_user_groups($cm->course, $USER->id);
             $groups = current($groups);
@@ -301,12 +301,12 @@ if (($meeting = aconnect_meeting_exists($aconnect, $meetfldscoid, $filter))) {
         $username     = get_connect_username($adobeconnect->userid);
         $meetfldscoid = aconnect_get_user_folder_sco_id($aconnect, $username);
         $meeting      = aconnect_meeting_exists($aconnect, $meetfldscoid, $filter);
-        
+
         if (!empty($meeting)) {
             $meeting = current($meeting);
         }
     }
-    
+
     // If meeting does not exist then display an error message
     if (empty($meeting)) {
 
@@ -388,7 +388,7 @@ echo $OUTPUT->box_start('generalbox', 'meetingsummary');
 if (NOGROUPS != $cm->groupmode && 0 != $groupid) {
 
     echo $renderer->display_meeting_detail($meetingdetail, $id, $groupid);
-} elseif (NOGROUPS == $cm->groupmode) { 
+} else if (NOGROUPS == $cm->groupmode) {
 
     // If groups mode is disabled
     echo $renderer->display_meeting_detail($meetingdetail, $id, $groupid);
@@ -412,7 +412,7 @@ if (!$adobeconnect->meetingpublic) {
         $showrecordings = true;
     }
 } else {
-    
+
     // Check group mode and group membership
     $showrecordings = true;
 }

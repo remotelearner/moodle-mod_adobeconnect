@@ -63,7 +63,7 @@ $aconnect   = aconnect_login();
 $recording  = array();
 $fldid      = aconnect_get_folder($aconnect, 'content');
 $usrcanjoin = false;
-$context    = get_context_instance(CONTEXT_MODULE, $cm->id);
+$context = context_module::instance($cm->id);
 $data       = aconnect_get_recordings($aconnect, $fldid, $meetscoid->meetingscoid);
 
 /// Set page global

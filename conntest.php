@@ -68,7 +68,7 @@
 
     $strtitle = get_string('connectiontesttitle', 'adobeconnect');
 
-    $systemcontext = get_context_instance(CONTEXT_SYSTEM);
+    $systemcontext = context_system::instance();
     $PAGE->set_context($systemcontext);
     $PAGE->set_title($strtitle);
     //$PAGE->set_heading($strtitle);

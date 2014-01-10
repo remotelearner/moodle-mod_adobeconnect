@@ -56,7 +56,7 @@ require_capability('moodle/role:assign', $context);
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 
-$contextname = print_context_name($context);
+$contextname = $context->get_context_name();
 $courseid = $course->id;
 
 // These are needed early because of tabs.php
@@ -93,8 +93,9 @@ if ($roleid) {
     // Create the user selector objects.
     $options = array('context' => $context, 'roleid' => $roleid);
 
-    $potentialuserselector = roles_get_potential_user_selector($context, 'addselect', $options);
-    $currentuserselector = new existing_role_holders('removeselect', $options);
+    $potentialuserselector = core_role_get_potential_user_selector($context, 'addselect', $options);
+    $currentuserselector = new core_role_existing_role_holders('removeselect', $options);
+
 
     // Process incoming role assignments
     $errors = array();
@@ -164,7 +165,7 @@ switch ($context->contextlevel) {
         }
         break;
     case CONTEXT_MODULE:
-        $PAGE->set_heading(print_context_name($context, false));
+        $PAGE->set_heading($context->get_context_name(false));
         $PAGE->set_cacheable(false);
         break;
     case CONTEXT_BLOCK:
