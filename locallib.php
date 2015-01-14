@@ -7,8 +7,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('connect_class.php');
-require_once('connect_class_dom.php');
+require_once($CFG->dirroot . '/mod/adobeconnect/connect_class.php');
+require_once($CFG->dirroot . '/mod/adobeconnect/connect_class_dom.php');
 
 define('ADOBE_VIEW_ROLE', 'view');
 define('ADOBE_HOST_ROLE', 'host');
