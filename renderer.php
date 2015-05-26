@@ -201,14 +201,16 @@ class mod_adobeconnect_renderer extends plugin_renderer_base {
         $html .= html_writer::empty_tag('input', $param);
         $html .= html_writer::end_tag('div');
 
-        $param = array('class' => 'aconbtnroles');
-        $html .= html_writer::start_tag('div', $param);
-        $param = array('type'=>'submit',
-                       'value'=>get_string('selectparticipants','adobeconnect'),
-                       'name'=>'participants',
-                       );
-        $html .= html_writer::empty_tag('input', $param);
-        $html .= html_writer::end_tag('div');
+        if ($meetingdetail->participants) {
+            $param = array('class' => 'aconbtnroles');
+            $html .= html_writer::start_tag('div', $param);
+            $param = array('type'=>'submit',
+                           'value'=>get_string('selectparticipants','adobeconnect'),
+                           'name'=>'participants',
+                           );
+            $html .= html_writer::empty_tag('input', $param);
+            $html .= html_writer::end_tag('div');
+        }
 
         $html .= html_writer::end_tag('div');
 
