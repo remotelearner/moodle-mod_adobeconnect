@@ -21,9 +21,38 @@
  * @copyright  (C) 2015 Remote Learner.net Inc http://www.remote-learner.net
  */
 
-$plugin->version   = 2015101600;
-$plugin->requires  = 2015051100;
-$plugin->cron      = 0;
-$plugin->component = 'mod_adobeconnect';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '3.0.0.0';
+namespace mod_adobeconnect\event;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * The adobeconnect_join_meeting event class.
+ *
+ * @property-read array $other {
+ *
+ *      User joins meeting
+ * }
+ */
+class adobeconnect_join_meeting extends \core\event\base {
+    /**
+     * This function initializes class properties.
+     */
+    protected function init() {
+        $this->data['crud'] = 'r';
+        $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
+    }
+
+    /**
+     * This function is overridden from the parent class.
+     */
+    public static function get_name() {
+        return get_string('event_join_meeting', 'mod_adobeconnect');
+    }
+
+    /**
+     * This function is overridden from the parent class.
+     */
+    public function get_description() {
+        return "User joined the meeting";
+    }
+}

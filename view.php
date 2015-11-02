@@ -1,13 +1,25 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package mod
- * @subpackage adobeconnect
- * @author Akinsaya Delamarre (adelamarre@remote-learner.net)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_adobeconnect
+ * @author     Akinsaya Delamarre (adelamarre@remote-learner.net)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  (C) 2015 Remote Learner.net Inc http://www.remote-learner.net
  */
-
-/// (Replace adobeconnect with the name of your module and remove this line)
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -23,36 +35,36 @@ global $CFG, $USER, $DB, $PAGE, $OUTPUT, $SESSION;
 
 if ($id) {
     if (! $cm = get_coursemodule_from_id('adobeconnect', $id)) {
-        error('Course Module ID was incorrect');
+        print_error('Course Module ID was incorrect');
     }
 
     $cond = array('id' => $cm->course);
     if (! $course = $DB->get_record('course', $cond)) {
-        error('Course is misconfigured');
+        print_error('Course is misconfigured');
     }
 
     $cond = array('id' => $cm->instance);
     if (! $adobeconnect = $DB->get_record('adobeconnect', $cond)) {
-        error('Course module is incorrect');
+        print_error('Course module is incorrect');
     }
 
 } else if ($a) {
 
     $cond = array('id' => $a);
     if (! $adobeconnect = $DB->get_record('adobeconnect', $cond)) {
-        error('Course module is incorrect');
+        print_error('Course module is incorrect');
     }
 
     $cond = array('id' => $adobeconnect->course);
     if (! $course = $DB->get_record('course', $cond)) {
-        error('Course is misconfigured');
+        print_error('Course is misconfigured');
     }
     if (! $cm = get_coursemodule_from_instance('adobeconnect', $adobeconnect->id, $course->id)) {
-        error('Course Module ID was incorrect');
+        print_error('Course Module ID was incorrect');
     }
 
 } else {
-    error('You must specify a course_module ID or an instance ID');
+    print_error('You must specify a course_module ID or an instance ID');
 }
 
 require_login($course, true, $cm);
@@ -437,8 +449,15 @@ if ($showrecordings and !empty($recordings)) {
     echo $OUTPUT->box_end();
 }
 
-add_to_log($course->id, 'adobeconnect', 'view',
-           "view.php?id=$cm->id", "View {$adobeconnect->name} details", $cm->id);
+// Trigger an event for joining a meeting.
+$params = array(
+    'relateduserid' => $USER->id,
+    'courseid' => $course->id,
+    'context' => context_module::instance($cm->id)
+);
+
+$event = \mod_adobeconnect\event\adobeconnect_view::create($params);
+$event->trigger();
 
 /// Finish the page
 echo $OUTPUT->footer();

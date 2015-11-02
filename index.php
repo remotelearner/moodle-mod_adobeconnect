@@ -1,14 +1,25 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package mod
- * @subpackage adobeconnect
- * @author Akinsaya Delamarre (adelamarre@remote-learner.net)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_adobeconnect
+ * @author     Akinsaya Delamarre (adelamarre@remote-learner.net)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  (C) 2015 Remote Learner.net Inc http://www.remote-learner.net
  */
-
-
-// Not sure if this page is needed anymore
 
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
@@ -20,13 +31,21 @@ global $USER, $DB;
 
 $params = array('id' => $id);
 if (! $course = $DB->get_record('course', $params)) {
-    error('Course ID is incorrect');
+    print_error('Course ID is incorrect');
 }
+
+$context = context_course::instance($id);
+$PAGE->set_context($context);
 
 $PAGE->set_pagelayout('incourse');
 
-add_to_log($course->id, 'adobeconnect', 'view all', "index.php?id=$course->id", '');
-
+$params = array(
+    'relateduserid' => $USER->id,
+    'courseid' => $id,
+    'context' => context_course::instance($id),
+);
+$event = \mod_adobeconnect\event\adobeconnect_view_all::create($params);
+$event->trigger();
 
 /// Get all required strings
 
@@ -52,7 +71,8 @@ if (! $adobeconnects = get_all_instances_in_course('adobeconnect', $course)) {
 
 $usesections = course_format_uses_sections($course->format);
 if ($usesections) {
-    $sections = get_all_sections($course->id);
+    $modinfo = get_fast_modinfo($course);
+    $sections = $modinfo->get_section_info_all();
 }
 
 $table = new html_table();

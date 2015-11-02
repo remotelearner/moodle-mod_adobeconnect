@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,11 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package mod
- * @subpackage adobeconnect
- * @author Akinsaya Delamarre (adelamarre@remote-learner.net)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_adobeconnect
+ * @author     Akinsaya Delamarre (adelamarre@remote-learner.net)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  (C) 2015 Remote Learner.net Inc http://www.remote-learner.net
  */
+
 
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/' . $CFG->admin . '/roles/lib.php');
@@ -70,7 +70,7 @@ if ($roleid && !isset($assignableroles[$roleid])) {
     $a = new stdClass;
     $a->roleid = $roleid;
     $a->context = $contextname;
-    print_error('cannotassignrolehere', '', get_context_url($context), $a);
+    print_error('cannotassignrolehere', '', $context->get_url(), $a);
 }
 
 // Work out an appropriate page title.
@@ -103,19 +103,30 @@ if ($roleid) {
         $userstoassign = $potentialuserselector->get_selected_users();
         if (!empty($userstoassign)) {
 
+            $rolename = $assignableroles[$roleid];
+            // Trigger an event for joining a meeting.
+            $params = array(
+                'courseid' => $course->id,
+                'context' => context_module::instance($cm->id),
+                'other' => array(
+                    'rolename' => $rolename
+                )
+            );
             foreach ($userstoassign as $adduser) {
                 $allow = true;
 
                 if ($allow) {
                     role_assign($roleid, $adduser->id, $context->id);
+
+                    $params['relateduserid'] = $adduser->id;
+                    $event = \mod_adobeconnect\event\adobeconnect_assign_role::create($params);
+                    $event->trigger();
                 }
             }
 
             $potentialuserselector->invalidate_selected_users();
             $currentuserselector->invalidate_selected_users();
 
-            $rolename = $assignableroles[$roleid];
-            add_to_log($course->id, 'role', 'assign', 'mod/adobeconnect/participant.php?contextid='.$context->id.'&roleid='.$roleid, $rolename, '', $USER->id);
             // Counts have changed, so reload.
             list($assignableroles, $assigncounts, $nameswithcounts) = get_assignable_roles($context, ROLENAME_BOTH, true);
         }
@@ -126,16 +137,29 @@ if ($roleid) {
         $userstounassign = $currentuserselector->get_selected_users();
         if (!empty($userstounassign)) {
 
+            $rolename = $assignableroles[$roleid];
+            // Trigger an event for joining a meeting.
+            $params = array(
+                'courseid' => $course->id,
+                'context' => context_module::instance($cm->id),
+                'other' => array(
+                    'rolename' => $rolename
+                )
+            );
+
             foreach ($userstounassign as $removeuser) {
                 //unassign only roles that are added manually, no messing with other components!!!
                 role_unassign($roleid, $removeuser->id, $context->id, '');
+
+                $params['relateduserid'] = $removeuser->id;
+                $event = \mod_adobeconnect\event\adobeconnect_unassign_role::create($params);
+                $event->trigger();
+
             }
 
             $potentialuserselector->invalidate_selected_users();
             $currentuserselector->invalidate_selected_users();
 
-            $rolename = $assignableroles[$roleid];
-            add_to_log($course->id, 'role', 'unassign', 'mod/adobeconnect/participant.php?contextid='.$context->id.'&roleid='.$roleid, $rolename, '', $USER->id);
             // Counts have changed, so reload.
             list($assignableroles, $assigncounts, $nameswithcounts) = get_assignable_roles($context, ROLENAME_BOTH, true);
         }
@@ -305,7 +329,7 @@ $assignurl = new moodle_url($PAGE->url, array('roleid'=>$roleid));
 
     if ($context->contextlevel > CONTEXT_USER) {
         echo html_writer::start_tag('div', array('class'=>'backlink'));
-        echo html_writer::tag('a', get_string('backto', '', $contextname), array('href'=>get_context_url($context)));
+        echo html_writer::tag('a', get_string('backto', '', $contextname), array('href' => $context->get_url()));
         echo html_writer::end_tag('div');
     }
 }
