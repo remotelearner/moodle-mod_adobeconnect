@@ -21,8 +21,8 @@
  * @copyright  (C) 2015 Remote Learner.net Inc http://www.remote-learner.net
  */
 
-$plugin->version   = 2015101600;
-$plugin->requires  = 2015051100;
+$plugin->version   = 2015111000;
+$plugin->requires  = 2015101600;
 $plugin->cron      = 0;
 $plugin->component = 'mod_adobeconnect';
 $plugin->maturity  = MATURITY_STABLE;
