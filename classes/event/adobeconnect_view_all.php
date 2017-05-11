@@ -21,25 +21,38 @@
  * @copyright  (C) 2015 Remote Learner.net Inc http://www.remote-learner.net
  */
 
-function xmldb_adobeconnect_uninstall() {
-    global $DB;
+namespace mod_adobeconnect\event;
 
-    $result = true;
+defined('MOODLE_INTERNAL') || die();
 
-    $param = array('shortname' => 'adobeconnectparticipant');
-    if ($mrole = $DB->get_record('role', $param)) {
-        $result = $result && delete_role($mrole->id);
+/**
+ * The adobeconnect_view_all event class.
+ *
+ * @property-read array $other {
+ *
+ *      User views all activity instances.
+ * }
+ */
+class adobeconnect_view_all extends \core\event\base {
+    /**
+     * This function initializes class properties.
+     */
+    protected function init() {
+        $this->data['crud'] = 'r';
+        $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
     }
 
-    $param = array('shortname' => 'adobeconnectpresenter');
-    if ($mrole = $DB->get_record('role', $param)) {
-        $result = $result && delete_role($mrole->id);
+    /**
+     * This function is overridden from the parent class.
+     */
+    public static function get_name() {
+        return get_string('event_view_all', 'mod_adobeconnect');
     }
 
-    $param = array('shortname' => 'adobeconnecthost');
-    if ($mrole = $DB->get_record('role', $param)) {
-        $result = $result && delete_role($mrole->id);
+    /**
+     * This function is overridden from the parent class.
+     */
+    public function get_description() {
+        return "All activity instances were viewed.";
     }
-
-    return $result;
 }

@@ -1,9 +1,24 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * @package mod
- * @subpackage adobeconnect
- * @author Akinsaya Delamarre (adelamarre@remote-learner.net)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_adobeconnect
+ * @author     Akinsaya Delamarre (adelamarre@remote-learner.net)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  (C) 2015 Remote Learner.net Inc http://www.remote-learner.net
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -35,7 +50,7 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 
     /// Adding the required "intro" field to hold the description of the instance
-        $this->add_intro_editor(false, get_string('adobeconnectintro', 'adobeconnect'));
+        $this->standard_intro_elements(get_string('adobeconnectintro', 'adobeconnect'));
 
 //        $mform->addElement('htmleditor', 'intro', get_string('adobeconnectintro', 'adobeconnect'));
 //        $mform->setType('intro', PARAM_RAW);
