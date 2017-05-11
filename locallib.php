@@ -634,8 +634,11 @@ function aconnect_get_recordings($aconnect, $folderscoid, $sourcescoid) {
                             if (!is_null($domnode)) {
                                 $meetingdetail = $innernodelist->item($x);
 
-                                // Check if the SCO item is a recording or uploaded document.  We only want to display recordings
-                                if (!is_null($meetingdetail->getElementsByTagName('duration')->item(0))) {
+                                // Check if the SCO item is a recording or uploaded document.  We only want to display recordings. Recordings are identified as an 'icon' attribute with a value of 'archive' in <sco> element, e.g. <sco icon='archive'>
+                                
+                                $icontype = $meetingdetail->attributes->getNamedItem('icon');
+                                
+                                if (!is_null($icontype) && $icontype->nodeValue === 'archive') {
 
                                     $j = (int) $domnode->nodeValue;
                                     $value = (!is_null($meetingdetail->getElementsByTagName('name'))) ?
@@ -668,8 +671,8 @@ function aconnect_get_recordings($aconnect, $folderscoid, $sourcescoid) {
 
                                     $recordings[$j]->modified = (string) $value;
 
-                                    $value = (!is_null($meetingdetail->getElementsByTagName('duration'))) ?
-                                             $meetingdetail->getElementsByTagName('duration')->item(0)->nodeValue : '';
+                                    $value = (!is_null($meetingdetail->attributes->getNamedItem('duration'))) ?
+                                             $meetingdetail->attributes->getNamedItem('duration')->nodeValue : '';
 
                                     $recordings[$j]->duration = (string) $value;
 
