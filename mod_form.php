@@ -80,6 +80,11 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
         $mform->addHelpButton('meetingpublic', 'meetingtype', 'adobeconnect');
 //        $mform->addHelpButton('meetingpublic', array('meetingtype', get_string('meetingtype', 'adobeconnect'), 'adobeconnect'));
 
+        // Audio Settings
+        $audiosettings = $this->get_audiosettings();
+        $mform->addElement('select', 'audiosetting', get_string('audiosetting', 'adobeconnect'), $audiosettings);
+        $mform->addHelpButton('audiosetting', 'audiosetting', 'adobeconnect');
+
         // Meeting Template
         $templates = array();
         $templates = $this->get_templates();
@@ -149,8 +154,8 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
         /// Search the user's adobe connect folder
         $usrfldscoid = aconnect_get_user_folder_sco_id($aconnect, $username);
 
-	if (!empty($usrfldscoid)) {
-        	$namematches = $namematches + aconnect_meeting_exists($aconnect, $usrfldscoid, $filter);
+        if (!empty($usrfldscoid)) {
+            $namematches = $namematches + aconnect_meeting_exists($aconnect, $usrfldscoid, $filter);
         }
 
         if (empty($namematches)) {
@@ -285,4 +290,11 @@ class mod_adobeconnect_mod_form extends moodleform_mod {
         return $templates_meetings;
     }
 
+    function get_audiosettings() {
+        $aconnect = aconnect_login();
+
+        $audiosettings = get_all_telephony_options($aconnect);
+        aconnect_logout($aconnect);
+        return $audiosettings;
+    }
 }

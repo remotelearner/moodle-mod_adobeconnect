@@ -1446,6 +1446,45 @@ function get_connect_username($userid) {
     return $username;
 }
 
+function get_all_telephony_options($aconnect) {
+
+    $params = array(
+        'action' => 'telephony-profile-list',
+    );
+
+    $aconnect->create_request($params);
+
+    if ($aconnect->call_success()) {
+        // Get shared templates folder sco-id
+        $audiosettings = new SimpleXMLElement($aconnect->_xmlresponse);
+
+        $audiooptions = [0 =>'Default (VOIP)'];
+        foreach ((array) $audiosettings->{'telephony-profiles'} as $audioprofile) {
+            $audioprofile = (array) $audioprofile;
+            $audiooptions[$audioprofile['@attributes']['profile-id']] = $audioprofile['profile-name'];
+        }
+        $audiosettings = $audiooptions;
+    }
+    return $audiosettings;
+}
+
+function aconnect_update_telephony($aconnect, $meetingscoid, $telephonyid) {
+    $params = array(
+        'action' => 'acl-field-update',
+        'field-id' => 'telephony-profile',
+        'value' => $telephonyid,
+        'acl-id' => $meetingscoid
+    );
+
+    $aconnect->create_request($params);
+
+    if ($aconnect->call_success()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 /**
  * TEST FUNCTIONS - DELETE THIS AFTER COMPLETION OF TEST
  */

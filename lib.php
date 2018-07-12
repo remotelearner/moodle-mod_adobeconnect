@@ -170,6 +170,7 @@ function adobeconnect_add_instance($adobeconnect) {
                 aconnect_update_meeting_perm($aconnect, $meetingscoid, ADOBE_MEETPERM_PUBLIC);
             }
 
+            aconnect_update_telephony($aconnect, $meetingscoid, $adobeconnect->audiosetting);
 
             // Insert record to activity instance in meeting_groups table
             $record = new stdClass;
@@ -213,6 +214,8 @@ function adobeconnect_add_instance($adobeconnect) {
         } else {
             aconnect_update_meeting_perm($aconnect, $meetingscoid, ADOBE_MEETPERM_PUBLIC);
         }
+
+        aconnect_update_telephony($aconnect, $meetingscoid, $adobeconnect->audiosetting);
 
         // Insert record to activity instance in meeting_groups table
         $record = new stdClass;
@@ -403,6 +406,8 @@ function adobeconnect_update_instance($adobeconnect) {
             } else {
                 aconnect_update_meeting_perm($aconnect, $grpmeeting->meetingscoid, ADOBE_MEETPERM_PUBLIC);
             }
+
+            aconnect_update_telephony($aconnect, $grpmeeting->meetingscoid, $adobeconnect->audiosetting);
 
             // Update calendar event
             $param = array('courseid' => $adobeconnect->course, 'instance' =>
