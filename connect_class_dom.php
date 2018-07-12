@@ -22,7 +22,7 @@
  */
 
 
-require_once('connect_class.php');
+require_once($CFG->dirroot . '/mod/adobeconnect/connect_class.php');
 
 class connect_class_dom extends connect_class {
 
