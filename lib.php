@@ -439,7 +439,6 @@ function adobeconnect_update_instance($adobeconnect) {
     }
 
     aconnect_logout($aconnect);
-
     return $DB->update_record('adobeconnect', $adobeconnect);
 }
 
