@@ -1458,7 +1458,7 @@ function get_all_telephony_options($aconnect) {
         // Get shared templates folder sco-id
         $audiosettings = new SimpleXMLElement($aconnect->_xmlresponse);
 
-        $audiooptions = [0 =>'Default (VOIP)'];
+        $audiooptions = [0 => get_string('audio_default', 'adobeconnect')];
         foreach ((array) $audiosettings->{'telephony-profiles'} as $audioprofile) {
             $audioprofile = (array) $audioprofile;
             $audiooptions[$audioprofile['@attributes']['profile-id']] = $audioprofile['profile-name'];

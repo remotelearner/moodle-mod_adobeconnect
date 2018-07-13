@@ -170,3 +170,4 @@ $string['event_join_meeting'] = 'User joined a meeting';
 $string['event_view_recording'] = 'User viewed a recording';
 $string['event_assign_role'] = 'User assigned a Connect Pro role';
 $string['event_unassign_role'] = 'User unassigned a Connect Pro role';
+$string['audio_default'] =  'Default (VOIP)';
