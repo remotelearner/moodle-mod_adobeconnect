@@ -21,8 +21,8 @@
  * @copyright  (C) 2015 Remote Learner.net Inc http://www.remote-learner.net
  */
 
-require_once('connect_class.php');
-require_once('connect_class_dom.php');
+require_once($CFG->dirroot . '/mod/adobeconnect/connect_class.php');
+require_once($CFG->dirroot . '/mod/adobeconnect/connect_class_dom.php');
 
 define('ADOBE_VIEW_ROLE', 'view');
 define('ADOBE_HOST_ROLE', 'host');
@@ -1444,6 +1444,45 @@ function get_connect_username($userid) {
     }
 
     return $username;
+}
+
+function get_all_telephony_options($aconnect) {
+
+    $params = array(
+        'action' => 'telephony-profile-list',
+    );
+
+    $aconnect->create_request($params);
+
+    if ($aconnect->call_success()) {
+        // Get shared templates folder sco-id
+        $audiosettings = new SimpleXMLElement($aconnect->_xmlresponse);
+
+        $audiooptions = [0 => get_string('audio_default', 'adobeconnect')];
+        foreach ((array) $audiosettings->{'telephony-profiles'} as $audioprofile) {
+            $audioprofile = (array) $audioprofile;
+            $audiooptions[$audioprofile['@attributes']['profile-id']] = $audioprofile['profile-name'];
+        }
+        $audiosettings = $audiooptions;
+    }
+    return $audiosettings;
+}
+
+function aconnect_update_telephony($aconnect, $meetingscoid, $telephonyid) {
+    $params = array(
+        'action' => 'acl-field-update',
+        'field-id' => 'telephony-profile',
+        'value' => $telephonyid,
+        'acl-id' => $meetingscoid
+    );
+
+    $aconnect->create_request($params);
+
+    if ($aconnect->call_success()) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**

@@ -24,7 +24,7 @@
 
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/' . $CFG->admin . '/roles/lib.php');
-require_once('locallib.php');
+require_once($CFG->dirroot . '/mod/adobeconnect/locallib.php');
 
 define("MAX_USERS_TO_LIST_PER_ROLE", 10);
 

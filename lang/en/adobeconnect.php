@@ -46,6 +46,7 @@ $string['meetinggroup'] = 'Meeting group';
 $string['meetingname'] = 'Meeting Name';
 $string['meetingstart'] = 'Meeting start time';
 $string['meetingtype'] = 'Meeting type';
+$string['audiosetting'] = 'Audio type';
 $string['modulename'] = 'Adobe Connect';
 $string['modulenameplural'] = 'Adobe Connect';
 $string['meettemplates'] = 'Meeting Templates';
@@ -149,6 +150,7 @@ host or presenter roles has already joined th meeting.
 If the meeting has support for separate groups at least 1 user in each group, who is
 to be present in the meeting, should have either the host or presenter role.
 </p>';
+$string['audiosetting_help'] = 'Select Audio profile for the conference room. Default is always VOIP.';
 $string['meettemplates_help'] = '<p>A meeting room template creates meeting with a custom layout for the meeting room.</p>';
 $string['pluginadministration'] = 'Adobe Connect Administration';
 $string['pluginname'] = 'Adobe Connect';
@@ -168,3 +170,4 @@ $string['event_join_meeting'] = 'User joined a meeting';
 $string['event_view_recording'] = 'User viewed a recording';
 $string['event_assign_role'] = 'User assigned a Connect Pro role';
 $string['event_unassign_role'] = 'User unassigned a Connect Pro role';
+$string['audio_default'] =  'Default (VOIP)';
