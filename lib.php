@@ -41,7 +41,13 @@ require_once('locallib.php');
 $adobeconnect_EXAMPLE_CONSTANT = 42;
 
 /** Include eventslib.php */
-require_once($CFG->libdir.'/eventslib.php');
+//  require_once($CFG->libdir.'/eventslib.php');
+/** 
+ * 	replaced with 'deprecatedlib.php'
+ *  because eventslib.php deleted since moodle 35
+ */
+
+require_once($CFG->libdir.'/deprecatedlib.php');
 /** Include calendar/lib.php */
 require_once($CFG->dirroot.'/calendar/lib.php');
 
