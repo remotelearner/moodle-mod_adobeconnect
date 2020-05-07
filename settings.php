@@ -81,21 +81,21 @@ if (!$mrole){
     if (isset($coursecreatorrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $coursecreatorrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($coursecreatorrid->id, $mrole->id);
+            core_role_set_assign_allowed($coursecreatorrid->id, $mrole->id);
         }
     }
 
     if (isset($editingteacherrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $editingteacherrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($editingteacherrid->id, $mrole->id);
+            core_role_set_assign_allowed($editingteacherrid->id, $mrole->id);
         }
     }
 
     if (isset($teacherrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $teacherrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($teacherrid->id, $mrole->id);
+            core_role_set_assign_allowed($teacherrid->id, $mrole->id);
         }
     }
 
@@ -119,21 +119,21 @@ if (!$mrole){
     if (isset($coursecreatorrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $coursecreatorrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($coursecreatorrid->id, $mrole->id);
+            core_role_set_assign_allowed($coursecreatorrid->id, $mrole->id);
         }
     }
 
     if (isset($editingteacherrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $editingteacherrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($editingteacherrid->id, $mrole->id);
+            core_role_set_assign_allowed($editingteacherrid->id, $mrole->id);
         }
     }
 
     if (isset($teacherrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $teacherrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($teacherrid->id, $mrole->id);
+            core_role_set_assign_allowed($teacherrid->id, $mrole->id);
         }
     }
 
@@ -156,21 +156,21 @@ if (!$mrole){
     if (isset($coursecreatorrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $coursecreatorrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($coursecreatorrid->id, $mrole->id);
+            core_role_set_assign_allowed($coursecreatorrid->id, $mrole->id);
         }
     }
 
     if (isset($editingteacherrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $editingteacherrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($editingteacherrid->id, $mrole->id);
+            core_role_set_assign_allowed($editingteacherrid->id, $mrole->id);
         }
     }
 
     if (isset($teacherrid->id)) {
         $param = array('allowassign' => $mrole->id, 'roleid' => $teacherrid->id);
         if (!$DB->get_record('role_allow_assign', $param)) {
-            allow_assign($teacherrid->id, $mrole->id);
+            core_role_set_assign_allowed($teacherrid->id, $mrole->id);
         }
     }
 }
