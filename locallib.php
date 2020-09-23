@@ -633,9 +633,11 @@ function aconnect_get_recordings($aconnect, $folderscoid, $sourcescoid) {
 
                             if (!is_null($domnode)) {
                                 $meetingdetail = $innernodelist->item($x);
+                                $recordingvac9 = $innernodelist->item($x)->attributes->getNamedItem('duration');
+                                $recordingvac8 = $meetingdetail->getElementsByTagName('duration')->item(0);
 
                                 // Check if the SCO item is a recording or uploaded document.  We only want to display recordings
-                                if (!is_null($meetingdetail->getElementsByTagName('duration')->item(0))) {
+                                if ((!is_null($recordingvac9) && $recordingvac9->nodeValue !== '') || !is_null($recordingvac8)) {
 
                                     $j = (int) $domnode->nodeValue;
                                     $value = (!is_null($meetingdetail->getElementsByTagName('name'))) ?
@@ -668,8 +670,8 @@ function aconnect_get_recordings($aconnect, $folderscoid, $sourcescoid) {
 
                                     $recordings[$j]->modified = (string) $value;
 
-                                    $value = (!is_null($meetingdetail->getElementsByTagName('duration'))) ?
-                                             $meetingdetail->getElementsByTagName('duration')->item(0)->nodeValue : '';
+                                    $value = (!is_null($recordingvac9) ?
+                                             $recordingvac9->nodeValue : $recordingvac8->nodeValue);
 
                                     $recordings[$j]->duration = (string) $value;
 
