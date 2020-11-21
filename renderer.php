@@ -252,17 +252,27 @@ class mod_adobeconnect_renderer extends plugin_renderer_base {
 
         $html .= html_writer::tag('h3', get_string('recordinghdr', 'adobeconnect'), $param);
 
-        $param = array('class' => 'aconrecording');
-        $html .= html_writer::start_tag('div', $param);
+        $table = new html_table();
+        $table->attributes['class'] = 'generaltable mod_index';
 
+        $counter = 0;
         foreach ($recordings as $key => $recordinggrp) {
             if (!empty($recordinggrp)) {
+                $table->head = array(
+                    '#',
+                    get_string('name'),
+                    get_string('startdate', 'adobeconnect'),
+                    get_string('enddate', 'adobeconnect'),
+                    get_string('duration', 'adobeconnect'),
+                );
                 foreach($recordinggrp as $recording_scoid => $recording) {
                 
                     if ($recording->sourcesco != $sourcescoid) {
                         continue;
                     }
+                    $counter++;
 
+                    $html .= html_writer::start_tag('tr');
                     $param = array('class' => 'aconrecordingrow');
                     $html .= html_writer::start_tag('div', $param);
 
@@ -272,15 +282,25 @@ class mod_adobeconnect_renderer extends plugin_renderer_base {
 
                     $param = array('target' => '_blank');
                     $name = html_entity_decode($recording->name);
+
+                    $link = html_writer::link($url, format_string($name), $param);
+                    $table->data[] = array(
+                        $counter,
+                        $link,
+                        userdate(strtotime($recording->startdate)),
+                        userdate(strtotime($recording->enddate)),
+                        gmdate("H:i:s", $recording->duration )
+                    );
+
                     $html .= html_writer::link($url, format_string($name), $param);
 
-                    $html .= html_writer::end_tag('div');
+                    $html .= html_writer::end_tag('tr');
 
                 }
             }
         }
 
-        $html .= html_writer::end_tag('div');
+        $html .= html_writer::table($table);
 
         $html .= html_writer::end_tag('div');
 
