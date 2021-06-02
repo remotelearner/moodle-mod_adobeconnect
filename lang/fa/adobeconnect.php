@@ -1,16 +1,16 @@
 <?php
 
 $string['actinbtngrp'] = '';
-$string['addparticipant'] = 'Add';
-$string['addpresenter']  = 'Add';
+$string['addparticipant'] = 'افزودن';
+$string['addpresenter']  = 'افزودن';
 $string['admin_httpauth'] = 'HTTP Authentication Header';
 $string['admin_httpauth_desc'] = 'The HTTP_AUTH_HEADER value used in your custom.ini';
-$string['admin_login'] = 'Admin Login';
+$string['admin_login'] = 'ورود ادمین';
 $string['admin_login_desc'] = 'Login for main admin account';
 $string['admin_password'] = 'Admin Password';
 $string['admin_password_desc'] = 'Password for main admin account';
 $string['adobeconnect'] = 'Adobe Connect';
-$string['adobeconnectfieldset'] = 'Adobe Connect Settings';
+$string['adobeconnectfieldset'] = 'ادوبی کانکت تنظیمات';
 $string['adobeconnecthost'] = 'Adobe Connect Host';
 $string['adobeconnecthostdescription'] = 'The host can give other users privileges, start and stop a meeting in addition to what a persenter can do';
 $string['adobeconnectintro'] = 'Intro';
@@ -168,6 +168,6 @@ $string['event_join_meeting'] = 'User joined a meeting';
 $string['event_view_recording'] = 'User viewed a recording';
 $string['event_assign_role'] = 'User assigned a Connect Pro role';
 $string['event_unassign_role'] = 'User unassigned a Connect Pro role';
-$string['startdate'] = 'start';
-$string['enddate'] = 'end';
-$string['duration'] = 'duration'; 
+$string['startdate'] = 'شروع';
+$string['enddate'] = 'پایان';
+$string['duration'] = 'مدت زمان';

@@ -150,4 +150,4 @@ $aconnect->request_http_header_login(1, $login);
 $adobesession = $aconnect->get_cookie();
 
 redirect($protocol . $CFG->adobeconnect_meethost . $port
-                     . $recording->url . '?session=' . $aconnect->get_cookie());
+                     . $recording->url . '?session=' . $aconnect->get_cookie() . '&html-view=true');
